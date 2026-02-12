@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Favour — Enter</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons (used by the love site) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="portal.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ════════════════════════════════════
+       1. PORTAL GATE
+       Shown first. Hidden after correct entry.
+  ════════════════════════════════════ -->
+  <div id="portal">
+
+    <div class="nebula">
+      <div class="nebula-orb"></div>
+      <div class="nebula-orb"></div>
+      <div class="nebula-orb"></div>
+    </div>
+
+    <div class="stars" id="stars"></div>
+
+    <!-- Entry form -->
+    <div class="portal-inner" id="portalInner">
+      <div class="lock-icon">🔒</div>
+      <p class="eyebrow">Private Experience</p>
+      <h1 class="headline">This was made<br>only for <span>Favour</span></h1>
+      <p class="subtitle">To enter, tell me your favourite colour</p>
+
+      <div class="input-group">
+        <label class="input-label" for="colorInput">type it below ↓</label>
+        <div class="input-wrapper">
+          <input
+            id="colorInput"
+            type="text"
+            placeholder="my favourite colour is…"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+            maxlength="40"
+          />
+        </div>
+        <button id="enterBtn">Confirm</button>
+        <span class="hint-text" id="hintText"></span>
+      </div>
+      <p class="music-note">🎵 music will play when you enter</p>
+    </div>
+
+    <!-- Heart reveal (after correct answer) -->
+    <div id="heartReveal">
+      <div class="heart-glyph" id="heartGlyph">💜</div>
+      <p class="heart-message">It really is you.<br>Welcome home, my love.</p>
+      <p class="tap-hint">tap the heart to open your surprise</p>
+    </div>
+
+  </div><!-- /#portal -->
+
+
+  <!-- ════════════════════════════════════
+       2. LOVE JOURNEY PROGRESS BAR
+       Fixed bottom bar. Visible after portal closes.
+  ════════════════════════════════════ -->
+  <div id="journeyBar">
+    <div class="journey-pill">
+      <p class="journey-label">Our Love Journey</p>
+      <div class="journey-chapters" id="journeyChapters"></div>
+      <div class="journey-progress-track">
+        <div class="journey-progress-fill" id="journeyFill"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       3. SECRET SPARK Easter Egg
+       Appears ~12s after portal closes. Fixed position.
+  ════════════════════════════════════ -->
+  <div class="secret-spark" id="secretSpark"></div>
+
+
+  <!-- ════════════════════════════════════
+       4. SECRET MEMORY OVERLAY
+       Shown when spark is clicked.
+  ════════════════════════════════════ -->
+  <div id="secretOverlay">
+    <div class="secret-card">
+      <div class="secret-glow-ring"></div>
+      <button class="secret-close" id="secretClose">✕</button>
+
+      <span class="secret-sparkle" style="top:12%;left:8%;--ss-dur:3.2s;--ss-del:0s">✨</span>
+      <span class="secret-sparkle" style="top:18%;right:10%;--ss-dur:2.8s;--ss-del:0.7s">💫</span>
+      <span class="secret-sparkle" style="bottom:15%;left:12%;--ss-dur:3.5s;--ss-del:0.3s">⭐</span>
+      <span class="secret-sparkle" style="bottom:20%;right:8%;--ss-dur:2.6s;--ss-del:1s">✨</span>
+
+      <span class="secret-lock-emoji" id="secretEmoji">🔓</span>
+      <p class="secret-eyebrow">Hidden Memory Unlocked</p>
+      <h2 class="secret-title">
+        You found a memory<br>only <span class="secret-name">you</span> were meant to find
+      </h2>
+      <div class="secret-divider"></div>
+      <p class="secret-body" id="secretBody"></p>
+      <p class="secret-counter" id="secretCounter"></p>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       5. MAIN SITE CONTENT
+       Hidden until portal is passed.
+  ════════════════════════════════════ -->
+  <div id="siteContent">
+
+    <!-- Ambient background layers -->
+    <div class="particle-bg"></div>
+    <div class="floating-hearts-container"></div>
+
+    <!-- Background music + toggle -->
+    <button class="music-toggle" id="musicToggle" title="Toggle Background Music">
+      <i class="fas fa-music"></i>
+    </button>
+    <audio id="backgroundMusic" loop>
+      <!--
+        REPLACE the src below with your actual audio file path.
+        Example: <source src="audio/our-song.mp3" type="audio/mpeg">
+      -->
+      <source src="song1.mp3" type="audio/wav">
+    </audio>
+
+    <!-- Navigation -->
+    <nav>
+      <a href="#home"><i class="fas fa-heart"></i> Home</a>
+      <a href="#story"><i class="fas fa-book"></i> Our Story</a>
+      <a href="#memories"><i class="fas fa-images"></i> Memories</a>
+      <a href="#appreciation"><i class="fas fa-sparkles"></i> What Makes You Special</a>
+      <a href="#voice"><i class="fas fa-headphones"></i> Voice Message</a>
+      <a href="#final"><i class="fas fa-infinity"></i> Forever</a>
+    </nav>
+
+    <main>
+
+      <!-- ── HERO ── -->
+      <section class="section" id="home">
+        <div class="hero-inner">
+          <h1><span class="typewriter"></span></h1>
+          <p class="hero-subtitle">A celebration of love, gratitude, and forever with you, Favour.</p>
+          <button class="btn-hero" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">
+            <i class="fas fa-arrow-down"></i> Begin Our Journey
+          </button>
+        </div>
+      </section>
+
+      <!-- ── OUR STORY ── -->
+      <section class="section" id="story">
+        <div class="story-container">
+          <h2><i class="fas fa-book"></i> How Our Story Began</h2>
+          <div class="timeline">
+
+            <div class="timeline-item scroll-reveal">
+              <h3><i class="fas fa-church"></i> Christian Union — First Year</h3>
+              <p>It was during that first-year Christian Union programme when I first saw you. There was something different about you, something that made my heart pause. You radiated a light that drew me in — authentic, warm, and deeply spiritual.</p>
+            </div>
+
+            <div class="timeline-item scroll-reveal">
+              <h3><i class="fas fa-comments"></i> In the WhatsApp Group</h3>
+              <p>We noticed each other in that WhatsApp group. Your messages were always thoughtful, always kind. That's when I realized you weren't just beautiful on the outside — your soul was even more radiant. I found myself checking my phone constantly, just to see if you had posted something.</p>
+            </div>
+
+            <div class="timeline-item scroll-reveal">
+              <h3><i class="fas fa-map-location-dot"></i> Walking Past Embu Town</h3>
+              <p>That walk past Embu town together changed everything. The way you laughed, the way you moved through the world with such grace and purpose. In those moments, I knew that meeting you wasn't just chance — it was destiny. You became my favorite person to be with.</p>
+            </div>
+
+            <div class="timeline-item scroll-reveal">
+              <h3><i class="fas fa-water"></i> The Falls & The Mud</h3>
+              <p>And then there was the falls. That moment when you slipped and got muddy, laughing at yourself without embarrassment — that's when I fell completely in love. You're real, you're humble, you're perfect in your imperfections. That muddy moment was the moment I knew I wanted forever with you.</p>
+            </div>
+
+            <div class="timeline-item scroll-reveal">
+              <h3><i class="fas fa-ring"></i> 2 Years & 4 Months</h3>
+              <p>From that Christian Union programme to now — every day with you has been a confirmation. You entered my life like a gentle breeze carrying the scent of lavender. I knew then that you were someone extraordinary, and I know it even more now.</p>
+            </div>
+
+            <div class="timeline-item scroll-reveal">
+              <h3><i class="fas fa-heart"></i> 1 Year & 5 Months Together</h3>
+              <p>We officially became each other's forever. Every moment since has been a confirmation of what my heart knew from the very beginning. Being with you isn't just the best decision I've ever made — it's a constant reminder of God's goodness in my life.</p>
+            </div>
+
+            <div class="timeline-item scroll-reveal">
+              <h3><i class="fas fa-stars"></i> Today & Forever</h3>
+              <p>And now, I get to celebrate you — the most beautiful, intelligent, kind-hearted soul I've ever known. Every day I choose you. Every moment matters. Thank you for being my greatest blessing, my forever person, my home.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ── MEMORIES ── -->
+      <section class="section" id="memories">
+        <div class="memories-wrapper">
+          <h2><i class="fas fa-images"></i> Playful Memories</h2>
+          <p class="memories-hint"><i class="fas fa-hand-pointer"></i> Click each memory to discover more</p>
+          <div class="memories-grid">
+
+            <div class="memory-card" onclick="openMemoryModal(this)">
+              <div class="memory-icon"><i class="fas fa-microphone-alt"></i></div>
+              <h3>Your Voice</h3>
+              <p>That melodic voice when you sing…</p>
+              <span class="expand-hint">Click to expand</span>
+            </div>
+
+            <div class="memory-card" onclick="openMemoryModal(this)">
+              <div class="memory-icon"><i class="fas fa-face-smile"></i></div>
+              <h3>Your Laughter</h3>
+              <p>The way your whole face lights up…</p>
+              <span class="expand-hint">Click to expand</span>
+            </div>
+
+            <div class="memory-card" onclick="openMemoryModal(this)">
+              <div class="memory-icon"><i class="fas fa-brain"></i></div>
+              <h3>Your Mind</h3>
+              <p>Your journalism brilliance…</p>
+              <span class="expand-hint">Click to expand</span>
+            </div>
+
+            <div class="memory-card" onclick="openMemoryModal(this)">
+              <div class="memory-icon"><i class="fas fa-star"></i></div>
+              <h3>Your Beauty</h3>
+              <p>Beyond your physical beauty…</p>
+              <span class="expand-hint">Click to expand</span>
+            </div>
+
+            <div class="memory-card" onclick="openMemoryModal(this)">
+              <div class="memory-icon"><i class="fas fa-shield"></i></div>
+              <h3>Your Support</h3>
+              <p>How you believe in me…</p>
+              <span class="expand-hint">Click to expand</span>
+            </div>
+
+            <div class="memory-card" onclick="openMemoryModal(this)">
+              <div class="memory-icon"><i class="fas fa-cross"></i></div>
+              <h3>Your Faith</h3>
+              <p>The beautiful way your devotion to God…</p>
+              <span class="expand-hint">Click to expand</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Memory Modal -->
+      <div id="memoryModal" class="modal">
+        <div class="modal-content">
+          <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+          <div id="modalMemoryIcon" class="memory-icon modal-memory-icon"></div>
+          <h2 id="modalMemoryTitle"></h2>
+          <p id="modalMemoryText"></p>
+        </div>
+      </div>
+
+<!-- ── LETTER WRITING SCENE ── -->
+      <section class="section letter-section" id="letter">
+        <div class="letter-container">
+          <div class="letter-paper">
+            <p class="letter-date">February 14, 2026</p>
+            <div class="letter-content">
+              <!-- Text will be typed here by JavaScript -->
+            </div>
+            <div class="letter-signature">
+              With all my love,<br>
+              Forever Yours 💜
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── WHAT MAKES YOU SPECIAL ── -->
+      <section class="section" id="appreciation">
+        <div class="appreciation-container">
+          <h2 class="appreciation-title"><i class="fas fa-sparkles"></i> What Makes You Special</h2>
+          <p class="appreciation-subtitle">Six reasons why you are my greatest blessing</p>
+          <div class="appreciation-messages" id="appreciationMessages">
+            <!-- Populated by script.js → populateAppreciationMessages() -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ── VOICE MESSAGE ── -->
+      <section class="section voice-section" id="voice">
+        <div class="voice-container">
+          <div class="voice-content">
+            <h2 class="voice-title"><i class="fas fa-headphones"></i> A Message From My Heart</h2>
+            <p class="voice-description">
+              I wanted to tell you something that words on a screen can't fully capture.<br><br>
+              Press play to hear my voice, carrying all the love and emotion I have for you.
+            </p>
+            <div class="voice-player">
+              <button class="voice-play-btn" id="voicePlayBtn">
+                <i class="fas fa-play"></i>
+              </button>
+              <div class="voice-waveform">
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+              </div>
+              <audio id="voiceMessage">
+                <!--
+                  REPLACE with your actual voice recording.
+                  Example: <source src="audio/voice-message.mp3" type="audio/mpeg">
+                -->
+                <source src="song2.mp3" type="audio/wav">
+              </audio>
+            </div>
+            <p class="voice-note">This is a special message recorded just for you. No one else will ever hear this moment.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── FOREVER ── -->
+      <section class="section finale-section" id="final">
+        <div class="finale-container">
+          <p class="voice-note">Tap on the petal to unlock Magic Meant for you ALONE!</p>
+          <div class="finale-bloom-wrapper">
+            <svg class="bloom-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="bloomGradient">
+                  <stop offset="0%"   stop-color="#ec4899" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.4"/>
+                </radialGradient>
+              </defs>
+              <g class="bloom-petals">
+                <circle cx="100" cy="40"  r="20" fill="url(#bloomGradient)" class="petal" style="--delay:0s"/>
+                <circle cx="150" cy="70"  r="20" fill="url(#bloomGradient)" class="petal" style="--delay:0.1s"/>
+                <circle cx="160" cy="130" r="20" fill="url(#bloomGradient)" class="petal" style="--delay:0.2s"/>
+                <circle cx="100" cy="160" r="20" fill="url(#bloomGradient)" class="petal" style="--delay:0.3s"/>
+                <circle cx="40"  cy="130" r="20" fill="url(#bloomGradient)" class="petal" style="--delay:0.4s"/>
+                <circle cx="50"  cy="70"  r="20" fill="url(#bloomGradient)" class="petal" style="--delay:0.5s"/>
+                <circle cx="100" cy="100" r="30" fill="#ec4899" class="bloom-center" opacity="0.9"/>
+              </g>
+            </svg>
+            <div class="bloom-glow"></div>
+          </div>
+
+          <div class="finale-message-wrapper">
+            <h2 class="finale-title">Forever & Always, Favour</h2>
+            <div class="finale-message">
+              <p class="finale-text">
+                My dearest love,<br><br>
+                <span class="finale-reveal-text">
+                  This website is a love letter — a digital embrace that holds every moment, every feeling, every reason I choose you every single day. From the moment I first saw you at Christian Union, something shifted in my soul. You weren't just beautiful; you were different. You were real.
+                  <br><br>
+                  I remember the WhatsApp group messages — how I found myself checking my phone obsessively, just hoping you'd posted something. Then came that walk past Embu town, where I realized destiny wasn't a fairy tale; it was you. It was always you.
+                  <br><br>
+                  And that moment at the falls when you fell in the mud and laughed without a care — that's when I knew. That's when I understood what forever meant. You're perfectly imperfect, authentically beautiful, and undeniably mine.
+                  <br><br>
+                  Your voice makes heaven listen. Your journalism makes the world better. Your faith inspires me to be stronger. Your eyes hold oceans of love. And that beautiful nose, those cheekbones — they frame a face that I could stare at for eternity and never tire.
+                  <br><br>
+                  But more than anything, Favour, it's your heart. It's how you love unconditionally, support passionately, and believe in God so deeply that it changes everyone around you. You've made me believe in myself when I doubted. You've made me believe in us.
+                  <br><br>
+                  Thank you for 2 years and 4 months of knowing you. Thank you for 1 year and 5 months of being mine. And thank you for the forever we're about to build together.
+                  <br><br>
+                  Happy Valentine's Day, my love. Today and always.
+                  <br><br>
+                  <strong class="finale-sign">Forever yours with all my heart,</strong><br>
+                  <strong class="finale-name">Your Forever Love ❤️</strong>
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="finale-hearts">
+            <div class="finale-heart-pulse"></div>
+          </div>
+
+        </div>
+      </section>
+      <!-- ── REPLAY MEMORY BUTTON ── -->
+<section class="replay-section">
+  <button class="replay-button" id="replayBtn">
+    <i class="fas fa-heart"></i>
+    Relive Our Love Story Again
+  </button>
+</section>
+
+    </main>
+  </div><!-- /#siteContent -->
+<script>
+  const bloom = document.querySelector('.finale-bloom-wrapper');
+
+  bloom.addEventListener('mouseenter', () => {
+    if (!bloom.classList.contains('tapped')) {
+      // Generates a number between -1 and 1
+      const x = (Math.random() - 0.5) * 2;
+      const y = (Math.random() - 0.5) * 2;
+      
+      bloom.style.setProperty('--hover-x', x);
+      bloom.style.setProperty('--hover-y', y);
+    }
+  });
+</script> 
+  <!-- ════════════════════════════════════
+       SCRIPTS
+       portal.js  → portal gate, journey bar, secret spark
+       script.js  → love site functionality
+  ════════════════════════════════════ -->
+  <script src="portal.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

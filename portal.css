@@ -1,0 +1,864 @@
+/* ════════════════════════════════════════════
+   portal.css
+   Covers:
+     1. Portal gate (entry screen)
+     2. Love Journey progress bar
+     3. Secret spark & memory overlay
+════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────
+   SHARED PORTAL TOKENS
+───────────────────────────────────────── */
+:root {
+  --portal-deep:  #0d0814;
+  --portal-mid:   #1a0f2e;
+  --portal-glow:  #7c3aed;
+  --portal-pink:  #ec4899;
+  --portal-soft:  #c4b5fd;
+  --portal-white: #ffffff;
+  --portal-muted: rgba(196, 181, 253, 0.55);
+}
+
+/* ─────────────────────────────────────────
+   KEYFRAMES
+───────────────────────────────────────── */
+@keyframes portalDrift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
+@keyframes portalTwinkle {
+  0%, 100% { opacity: 0; }
+  50%       { opacity: var(--max-op, 0.7); }
+}
+
+@keyframes portalFadeSlideIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes portalLockFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes portalShake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-5px); }
+  80%       { transform: translateX(5px); }
+}
+
+@keyframes portalHeartPulse {
+  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 25px rgba(236,72,153,0.85)); }
+  50%       { transform: scale(1.07); filter: drop-shadow(0 0 50px rgba(236,72,153,1)); }
+}
+
+@keyframes portalBreathe {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+@keyframes portalPetalFloat {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(0.5); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(1); opacity: 0; }
+}
+
+@keyframes journeyChapterPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(236,72,153,0.12), 0 0 16px rgba(236,72,153,0.4); }
+  50%       { box-shadow: 0 0 0 7px rgba(236,72,153,0.08), 0 0 28px rgba(236,72,153,0.6); }
+}
+
+@keyframes sparkDrift {
+  0%   { transform: translate(0, 0)       scale(1)    rotate(0deg);   opacity: 0.7; }
+  20%  { transform: translate(30px,-50px) scale(1.1)  rotate(15deg);  opacity: 1; }
+  40%  { transform: translate(-20px,-90px)scale(0.9)  rotate(-10deg); opacity: 0.8; }
+  60%  { transform: translate(60px,-40px) scale(1.15) rotate(20deg);  opacity: 1; }
+  80%  { transform: translate(-40px,-70px)scale(0.95) rotate(-5deg);  opacity: 0.75; }
+  100% { transform: translate(0, 0)       scale(1)    rotate(0deg);   opacity: 0.7; }
+}
+
+@keyframes sparkTwirl {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50%       { transform: scale(1.2) rotate(180deg); }
+}
+
+@keyframes rippleOut {
+  from { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+  to   { transform: translate(-50%,-50%) scale(8); opacity: 0; }
+}
+
+@keyframes secretReveal {
+  from { transform: scale(0.88); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+@keyframes secretUnlockBounce {
+  from { transform: scale(0) rotate(-20deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg);   opacity: 1; }
+}
+
+@keyframes secretRingGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(124,58,237,0.3), inset 0 0 20px rgba(124,58,237,0.05); }
+  50%       { box-shadow: 0 0 40px rgba(236,72,153,0.4), inset 0 0 30px rgba(236,72,153,0.08); }
+}
+
+@keyframes secretSparkleFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg);    opacity: 0.3; }
+  50%       { transform: translateY(-12px) rotate(20deg); opacity: 0.7; }
+}
+
+
+/* ══════════════════════════════════════════
+   1. PORTAL GATE
+══════════════════════════════════════════ */
+
+#portal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--portal-deep);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 1.8s cubic-bezier(0.4,0,0.2,1),
+              transform 1.8s cubic-bezier(0.4,0,0.2,1);
+}
+
+#portal.fade-out {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+/* Nebula background */
+.nebula {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nebula-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: portalDrift 12s ease-in-out infinite alternate;
+}
+
+.nebula-orb:nth-child(1) {
+  width: 520px; height: 520px;
+  background: radial-gradient(circle, rgba(124,58,237,0.35), transparent 70%);
+  top: -120px; left: -120px;
+  animation-delay: 0s;
+}
+
+.nebula-orb:nth-child(2) {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(236,72,153,0.28), transparent 70%);
+  bottom: -80px; right: -80px;
+  animation-delay: -4s;
+}
+
+.nebula-orb:nth-child(3) {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(196,181,253,0.2), transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  animation-delay: -8s;
+}
+
+/* Star field */
+.stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: portalTwinkle var(--dur, 4s) ease-in-out infinite var(--delay, 0s);
+}
+
+/* Portal inner content */
+.portal-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Lock icon */
+.lock-icon {
+  font-size: 2.2rem;
+  color: var(--portal-muted);
+  margin-bottom: 2.2rem;
+  opacity: 0;
+  animation:
+    portalLockFloat 3s ease-in-out infinite,
+    portalFadeSlideIn 1s 0.2s ease forwards;
+}
+
+/* Eyebrow */
+.eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--portal-muted);
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: portalFadeSlideIn 1s 0.5s ease forwards;
+}
+
+/* Headline */
+.headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  line-height: 1.15;
+  color: var(--portal-white);
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: portalFadeSlideIn 1s 0.8s ease forwards;
+}
+
+.headline span {
+  background: linear-gradient(120deg, var(--portal-soft), var(--portal-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtitle */
+.subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  color: var(--portal-muted);
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: portalFadeSlideIn 1s 1.1s ease forwards;
+}
+
+/* Input group */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 340px;
+  opacity: 0;
+  animation: portalFadeSlideIn 1s 1.4s ease forwards;
+}
+
+.input-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--portal-muted);
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#colorInput {
+  width: 100%;
+  padding: 1rem 1.4rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(196,181,253,0.2);
+  border-radius: 50px;
+  color: var(--portal-white);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  caret-color: var(--portal-pink);
+  letter-spacing: 0.05em;
+}
+
+#colorInput::placeholder {
+  color: rgba(196,181,253,0.35);
+  font-style: italic;
+}
+
+#colorInput:focus {
+  border-color: rgba(196,181,253,0.5);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.15),
+              0 0 20px rgba(124,58,237,0.1);
+}
+
+#colorInput.wrong {
+  border-color: rgba(236,72,153,0.6);
+  box-shadow: 0 0 0 3px rgba(236,72,153,0.12);
+  animation: portalShake 0.4s ease;
+}
+
+/* Enter button */
+#enterBtn {
+  padding: 0.9rem 2.4rem;
+  border-radius: 50px;
+  border: 1px solid rgba(196,181,253,0.25);
+  background: rgba(124,58,237,0.12);
+  color: var(--portal-soft);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: none;
+}
+
+#enterBtn:hover {
+  background: rgba(124,58,237,0.25);
+  border-color: rgba(196,181,253,0.5);
+  color: var(--portal-white);
+  box-shadow: 0 0 30px rgba(124,58,237,0.25);
+  transform: translateY(-2px);
+}
+
+/* Hint text */
+.hint-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: rgba(236,72,153,0.7);
+  height: 1.4rem;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.hint-text.show { opacity: 1; }
+
+/* Music note */
+.music-note {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--portal-muted);
+  opacity: 0;
+  animation: portalFadeSlideIn 1s 1.8s ease forwards;
+  margin-top: 0.5rem;
+}
+
+/* ── HEART REVEAL ── */
+#heartReveal {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+#heartReveal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.heart-glyph {
+  font-size: 6rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 30px rgba(236,72,153,0.9));
+  animation: portalHeartPulse 1.2s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 0.2s;
+  user-select: none;
+  position: relative;
+  z-index: 5;
+}
+
+.heart-glyph:hover  { transform: scale(1.1); }
+.heart-glyph:active { transform: scale(0.96); }
+
+.heart-message {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--portal-soft);
+  text-align: center;
+  max-width: 320px;
+  line-height: 1.5;
+  animation: portalFadeSlideIn 0.8s ease forwards;
+}
+
+.tap-hint {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--portal-muted);
+  animation: portalBreathe 2s ease-in-out infinite;
+}
+
+/* Petals */
+.petal-burst {
+  position: absolute;
+  font-size: 1.4rem;
+  opacity: 0;
+  pointer-events: none;
+  animation: portalPetalFloat var(--dur) ease-out forwards var(--del);
+}
+
+
+/* ══════════════════════════════════════════
+   2. LOVE JOURNEY PROGRESS BAR
+══════════════════════════════════════════ */
+
+#journeyBar {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  width: min(720px, 92vw);
+}
+
+#journeyBar.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.journey-pill {
+  background: rgba(13,8,20,0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(196,181,253,0.18);
+  border-radius: 60px;
+  padding: 14px 26px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4),
+              0 0 0 1px rgba(124,58,237,0.08);
+}
+
+.journey-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(196,181,253,0.5);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.journey-chapters {
+  display: flex;
+  align-items: center;
+}
+
+.journey-chapter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Connector line */
+.journey-chapter:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: calc(50% + 10px);
+  width: calc(100% - 20px);
+  height: 2px;
+  background: rgba(196,181,253,0.15);
+  border-radius: 2px;
+  transition: background 0.6s ease;
+  z-index: 0;
+}
+
+.journey-chapter.passed:not(:last-child)::after {
+  background: linear-gradient(90deg, var(--portal-glow), var(--portal-pink));
+  box-shadow: 0 0 8px rgba(124,58,237,0.6);
+}
+
+/* Dot */
+.chapter-dot {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(196,181,253,0.2);
+  background: rgba(13,8,20,0.8);
+  position: relative;
+  z-index: 1;
+  transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.journey-chapter.active .chapter-dot {
+  border-color: var(--portal-pink);
+  background: rgba(236,72,153,0.15);
+  box-shadow: 0 0 0 4px rgba(236,72,153,0.12),
+              0 0 16px rgba(236,72,153,0.4);
+  animation: journeyChapterPulse 2s ease-in-out infinite;
+}
+
+.journey-chapter.passed .chapter-dot {
+  border-color: var(--portal-glow);
+  background: linear-gradient(135deg, var(--portal-glow), var(--portal-pink));
+  box-shadow: 0 0 12px rgba(124,58,237,0.5);
+}
+
+.chapter-dot-inner {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(196,181,253,0.3);
+  transition: all 0.4s ease;
+}
+
+.journey-chapter.active .chapter-dot-inner {
+  background: var(--portal-pink);
+  box-shadow: 0 0 6px var(--portal-pink);
+}
+
+.journey-chapter.passed .chapter-dot-inner {
+  background: rgba(255,255,255,0.9);
+}
+
+/* Chapter name */
+.chapter-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: rgba(196,181,253,0.35);
+  text-align: center;
+  transition: color 0.4s ease;
+  white-space: nowrap;
+}
+
+.journey-chapter.active .chapter-name {
+  color: rgba(236,72,153,0.9);
+  font-weight: 500;
+}
+
+.journey-chapter.passed .chapter-name {
+  color: rgba(196,181,253,0.65);
+}
+
+/* Progress fill */
+.journey-progress-track {
+  margin-top: 10px;
+  height: 2px;
+  background: rgba(196,181,253,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.journey-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--portal-glow), var(--portal-pink));
+  border-radius: 2px;
+  transition: width 0.7s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 0 8px rgba(236,72,153,0.6);
+}
+
+/* Tooltip */
+.chapter-tooltip {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: rgba(13,8,20,0.95);
+  border: 1px solid rgba(196,181,253,0.2);
+  color: rgba(196,181,253,0.9);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.82rem;
+  font-style: italic;
+  white-space: nowrap;
+  padding: 6px 14px;
+  border-radius: 20px;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.journey-chapter:hover .chapter-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* ══════════════════════════════════════════
+   3. SECRET SPARK & MEMORY OVERLAY
+══════════════════════════════════════════ */
+
+/* Spark */
+.secret-spark {
+  position: fixed;
+  width: 18px; height: 18px;
+  z-index: 600;
+  cursor: pointer;
+  pointer-events: auto;
+  filter: drop-shadow(0 0 6px rgba(236,72,153,0.9));
+  transition: transform 0.2s ease, filter 0.2s ease;
+  user-select: none;
+  display: none;
+  animation: sparkDrift var(--spark-dur, 14s) ease-in-out infinite var(--spark-del, 0s);
+}
+
+.secret-spark:hover {
+  transform: scale(1.4);
+  filter: drop-shadow(0 0 14px rgba(236,72,153,1));
+}
+
+.secret-spark::before {
+  content: '✨';
+  font-size: 18px;
+  display: block;
+  animation: sparkTwirl 3s ease-in-out infinite;
+}
+
+/* Ripple on click */
+.spark-ripple {
+  position: fixed;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(236,72,153,0.8);
+  pointer-events: none;
+  z-index: 599;
+  animation: rippleOut 0.6s ease-out forwards;
+}
+
+/* Overlay backdrop */
+#secretOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: rgba(4,1,10,0.88);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+#secretOverlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Secret card */
+.secret-card {
+  position: relative;
+  width: min(520px, 90vw);
+  background: linear-gradient(145deg,
+    rgba(91,33,182,0.18),
+    rgba(236,72,153,0.12)
+  );
+  border: 1px solid rgba(196,181,253,0.2);
+  border-radius: 24px;
+  padding: 3rem 2.8rem;
+  text-align: center;
+  box-shadow: 0 0 80px rgba(124,58,237,0.2),
+              0 0 0 1px rgba(196,181,253,0.08);
+  transform: scale(0.88);
+  opacity: 0;
+}
+
+#secretOverlay.open .secret-card {
+  animation: secretReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards;
+}
+
+/* Glow ring */
+.secret-glow-ring {
+  position: absolute;
+  inset: -1px;
+  border-radius: 24px;
+  background: transparent;
+  border: 1px solid transparent;
+  animation: secretRingGlow 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Close button */
+.secret-close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.3rem;
+  background: none;
+  border: none;
+  color: rgba(196,181,253,0.35);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: color 0.2s, background 0.2s;
+  line-height: 1;
+  box-shadow: none;
+}
+
+.secret-close:hover {
+  color: rgba(196,181,253,0.9);
+  background: rgba(196,181,253,0.1);
+  transform: none;
+  box-shadow: none;
+}
+
+/* Ambient sparkles */
+.secret-sparkle {
+  position: absolute;
+  font-size: 1rem;
+  pointer-events: none;
+  opacity: 0.4;
+  animation: secretSparkleFloat var(--ss-dur, 3s) ease-in-out infinite var(--ss-del, 0s);
+}
+
+/* Lock emoji */
+.secret-lock-emoji {
+  font-size: 2.8rem;
+  display: block;
+  margin-bottom: 1.2rem;
+  animation: secretUnlockBounce 0.8s 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+/* Eyebrow */
+.secret-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(196,181,253,0.5);
+  margin-bottom: 0.8rem;
+}
+
+/* Title */
+.secret-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  color: rgba(255,255,255,0.95);
+  line-height: 1.3;
+  margin-bottom: 1.6rem;
+}
+
+.secret-name {
+  background: linear-gradient(120deg, #c4b5fd, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Divider */
+.secret-divider {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196,181,253,0.4), transparent);
+  margin: 0 auto 1.6rem;
+}
+
+/* Body */
+.secret-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: rgba(196,181,253,0.8);
+  line-height: 1.85;
+  font-style: italic;
+}
+
+.secret-body strong {
+  font-style: normal;
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+}
+
+/* Counter */
+.secret-counter {
+  margin-top: 1.8rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(196,181,253,0.3);
+}
+
+
+/* ══════════════════════════════════════════
+   4. SITE CONTENT WRAPPER
+══════════════════════════════════════════ */
+
+#siteContent {
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+
+#siteContent.visible {
+  opacity: 1;
+}
+
+
+/* ══════════════════════════════════════════
+   5. RESPONSIVE — PORTAL & JOURNEY BAR
+══════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .journey-pill {
+    padding: 12px 16px;
+  }
+
+  .chapter-name {
+    font-size: 0.5rem;
+  }
+
+  .chapter-dot {
+    width: 16px; height: 16px;
+  }
+
+  .chapter-dot-inner {
+    width: 5px; height: 5px;
+  }
+
+  .chapter-tooltip {
+    display: none; /* too cramped on mobile */
+  }
+
+  .secret-card {
+    padding: 2rem 1.6rem;
+  }
+
+  .secret-title {
+    font-size: 1.3rem;
+  }
+}
