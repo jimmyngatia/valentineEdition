@@ -182,6 +182,7 @@ const CHAPTERS = [
   { id: 'home',         name: 'Meeting',         tip: 'Where it all began…' },
   { id: 'story',        name: 'Our Story',        tip: 'CU → Embu → The Falls' },
   { id: 'memories',     name: 'Memories',         tip: 'Every moment we shared' },
+  { id: 'gallery',      name: 'Gallery',          tip: 'Our photos, our moments' },
   { id: 'appreciation', name: "You're Special",   tip: 'The reasons I love you' },
   { id: 'voice',        name: 'Voice',            tip: 'Recorded just for you' },
   { id: 'final',        name: 'Forever',          tip: 'Always & forever, Favour' }
@@ -252,11 +253,11 @@ const SECRET_MEMORIES = [
   },
   {
     emoji: '📱',
-    body: `Every morning before I got out of bed. Every break between lectures. Every quiet moment — I was always checking the group, just in case you'd posted something. <em>Not because I needed to. Because you made ordinary moments feel like waiting for something wonderful.</em>`
+    body: `Every morning before I got out of bed. Every break between lectures. Every quiet moment — I was always checking the group, just in case you'd typed something in Anzafyt. <em>Then it was just about vybe. Now its more.</em>`
   },
   {
     emoji: '🌅',
-    body: `Christian Union. First year. I don't even remember what was being said at the front. I just remember noticing you and thinking, in the quietest, most certain way: <em>"She's different."</em> I didn't know your name yet. <strong>But somehow I already knew you mattered.</strong>`
+    body: `Nairobi... When we travelled to Nairobi together, and went around the place. I kept admiring every moment, Cant wait to have more. <strong>And more.</strong>`
   },
   {
     emoji: '🚶',
@@ -264,20 +265,16 @@ const SECRET_MEMORIES = [
   },
   {
     emoji: '💌',
-    body: `I wrote you something once — in my notes app at 11pm when I couldn't sleep. Never sent it. It just said: <em>"I don't know what we are yet. But I know I don't want to find out what life looks like without you in it."</em> <strong>That was the truest thing I'd ever written.</strong>`
+    body: `I ever wondered — ALl the gifts you have ever gifted me. And i said: <em>"I dont know what the future holds. But a future with you, in Gods hands.."</em> <strong>That is the future i want.</strong>`
   },
   {
     emoji: '☕',
-    body: `That time we talked for hours and I completely lost track of time. When I finally looked at my phone, three hours had passed like three minutes. That's when I realized — <strong>being with you makes time irrelevant.</strong> <em>I could talk to you forever and it would never be enough.</em>`
+    body: `That time we talked for hours and I completely lost track of time. Past Njukiri and far beyond. That's when I realized — <strong>being with you makes time irrelevant.</strong> <em>I could talk to you forever and it would never be enough.</em>`
   },
   {
     emoji: '🌙',
-    body: `I remember lying awake one night, just thinking about you. And I realized something: <em>You're not just someone I love. You're someone who makes me believe in love</em> — the real kind, the deep kind, <strong>the kind that changes everything.</strong>`
+    body: `I remember the moments of prayers we have had. Moments of repentance and reflection. Moments of going to God. The i realize: <em>You're not just someone I love. You are someone i needed</em> — the real kind, the deep kind, <strong>the kind that changes everything.</strong>`
   },
-  {
-    emoji: '✨',
-    body: `There was this moment — you probably don't even remember it — when you smiled at me and the whole world just… <strong>stopped.</strong> Everything became quiet. Everything became simple. <em>In that moment, I knew what "home" meant. It meant you.</em>`
-  }
 ];
 
 let secretsFound  = 0;

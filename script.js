@@ -86,72 +86,407 @@ function initializeParticles() {
   
   
   /* ─────────────────────────────────────────
-     3. MEMORY CARD MODALS
+     3. CINEMATIC MEMORY MUSEUM
   ───────────────────────────────────────── */
-  const MEMORY_DATA = {
-    'Your Voice': {
-      icon: '<i class="fas fa-microphone-alt"></i>',
-      title: 'Your Voice',
-      text: "That melodic voice when you sing, the gentle way you laugh, the warmth in every word you speak to me — pure magic. When you sing, it's like the universe stops to listen. Your voice carries emotion that touches my soul in ways words could never explain."
+
+  // Each memory has:
+  //   tag       — short label shown in cards & modal
+  //   title     — italic heading in modal
+  //   poetic    — one italicised emotional line
+  //   text      — full paragraph story
+  //   image     — main card bg  (path to your photo, e.g. 'img/voice.jpg')
+  //   images[]  — thumbnail strip (can repeat or add more shots)
+  //
+  // 📸 TO ADD PHOTOS: replace the 'image' and 'images' paths with your real files.
+  //    The cards look great even without photos — a rich gradient placeholder shows.
+
+  const CINEMATIC_MEMORIES = {
+    voice: {
+      tag:    '<i class="fas fa-music"></i> Singing',
+      title:  'Your Voice',
+      poetic: '"When you sing, heaven stops to listen."',
+      text:   "That melodic voice when you sing — the gentleness of it, the way it carries so much soul. It's like every note you release is a prayer. When you sing, the world genuinely becomes more beautiful. I've caught myself holding my breath just to hear you better, terrified of missing even a second. Your voice carries emotion that no words could ever replicate. It's a gift, Favour — and I get to be the one who hears it up close.",
+      image:  'img/sing.jpg',
+      images: ['img/sing.jpg', 'img/worshipper.jpg', 'img/voice3.jpg']
     },
-    'Your Laughter': {
-      icon: '<i class="fas fa-face-smile"></i>',
-      title: 'Your Laughter',
-      text: "The way your whole face lights up when you genuinely laugh — it's the most beautiful sound and sight in the world. Your laughter is contagious, authentic, and it's become my favourite melody. Every time you laugh, I fall in love with you all over again."
+    laughter: {
+      tag:    '<i class="fas fa-face-smile"></i> Joy',
+      title:  'Your Laughter',
+      poetic: '"The laugh I fell in love with — before I even knew I was falling."',
+      text:   "The way your whole face lights up when you genuinely laugh — eyes squinting just a little, head tilting back — it's the most beautiful thing I've ever been lucky enough to witness. Your laughter is honest and contagious. It doesn't perform, it just is. Every time I hear it, I fall in love with you all over again. It is its own kind of medicine. It is my favourite sound in the world.",
+      image:  'img/laughter.jpeg',
+      images: ['img/laughter.jpeg', 'img/walking.jpeg', 'img/laughter3.jpg']
     },
-    'Your Mind': {
-      icon: '<i class="fas fa-brain"></i>',
-      title: 'Your Mind',
-      text: "Your journalism brilliance, your thoughtful perspectives, the way you see the world with such clarity and compassion. The way you analyse stories, the depth of your understanding, how you articulate truths that matter — you inspire me to be a better thinker, a better observer of the world."
+    mind: {
+      tag:    '<i class="fas fa-pen-nib"></i> Cook',
+      title:  'Your Cooking skills',
+      poetic: '"She cooks irresistable food every other day. One I\'ve never tasted."',
+      text:   "Your cooking skills always attracts me closer to you. Creates a space for more talks and reconciliation in case needed. Its a gift i wouldnt love to loose.",
+      image:  'img/cook.jpg',
+      images: ['img/cook.jpg', 'img/studying.jpeg', 'img/mind3.jpg']
     },
-    'Your Beauty': {
-      icon: '<i class="fas fa-star"></i>',
-      title: 'Your Beauty',
-      text: "Beyond your physical beauty that takes my breath away, it's the radiance that comes from your pure, loving soul. Your eyes are windows to the most beautiful heart, your smile could light up the darkest room, but what makes you truly beautiful is the goodness within you."
+    beauty: {
+      tag:    '<i class="fas fa-eye"></i> Beauty',
+      title:  'Your Beauty',
+      poetic: '"Eyes that hold entire oceans. A face I could study for a lifetime."',
+      text:   "Your beauty takes my breath away — but not just in the way people usually mean. Yes, your eyes are extraordinary — expressive in ways that feel almost unfair. Yes, that nose, those cheekbones — they frame a face I could look at for eternity. But beyond the physical, it's the radiance that pours out of you. The kindness that lives in your expression even when you don't notice it. The way you glow when you talk about something you love. That's the beauty that gets me every time.",
+      image:  'img/beauty.jpeg',
+      images: ['img/beauty.jpeg', 'img/eyes.jpg', 'img/beauty3.jpg']
     },
-    'Your Support': {
-      icon: '<i class="fas fa-shield"></i>',
-      title: 'Your Support',
-      text: "How you believe in me, encourage me, and stand by my side through every season — you're my greatest blessing. You lift me up when I'm down, celebrate my wins as if they're your own, and believe in my dreams even when I doubt myself. That's the kind of love that changes lives."
+    support: {
+      tag:    '<i class="fas fa-heart"></i> Together',
+      title:  'Your Support',
+      poetic: '"You believed in me before I remembered how to believe in myself."',
+      text:   "How you believe in me. AS A DRUMMER and AS A PROGRAMMER.— your encouragement, your patience, the way you stand by my side through every season. You lift me up when I'm down and celebrate my wins as if they're your own. You believe in my dreams even when I doubt myself. That's the kind of love that changes lives. You have changed mine, Favour. Deeply and permanently. I don't think you always know how much you carry me simply by choosing to stay.",
+      image:  'img/drummer.jpg',
+      images: ['img/travel.jpg', 'img/drummer.jpg', 'img/support3.jpg']
     },
-    'Your Faith': {
-      icon: '<i class="fas fa-cross"></i>',
-      title: 'Your Faith',
-      text: "The beautiful way your devotion to God shapes everything you do — it inspires me to be better, kinder, stronger. Your faith is real, lived out daily in how you treat others, how you carry your burdens, and how you trust in something greater. You've made me want to know God the way you do."
+    faith: {
+      tag:    '<i class="fas fa-cross"></i> Faith',
+      title:  'Your Faith',
+      poetic: '"Her devotion to God makes everything around her feel sacred."',
+      text:   "The beautiful way your devotion to God shapes everything you do — it inspires me to be better, kinder, stronger. Your faith isn't performance or noise. It's quiet and real, lived out daily in how you treat people, how you carry your burdens with grace, how you trust in something greater even when circumstances say otherwise. You've made me want to know God the way you do. You've made faith feel like something you live, not just something you say.",
+      image:  'img/worshipper.jpg',
+      images: ['img/sing.jpg', 'img/training.jpg', 'img/faith3.jpg']
     }
   };
-  
-  function openMemoryModal(card) {
-    const title = card.querySelector('h3').textContent;
-    const data  = MEMORY_DATA[title];
+
+  const MEMORY_KEYS   = Object.keys(CINEMATIC_MEMORIES);
+  let   currentMemIdx = 0;
+
+  function openCinematicModal(key) {
+    const data  = CINEMATIC_MEMORIES[key];
     if (!data) return;
-  
-    document.getElementById('modalMemoryIcon').innerHTML = data.icon;
-    document.getElementById('modalMemoryTitle').textContent = data.title;
-    document.getElementById('modalMemoryText').textContent  = data.text;
-    document.getElementById('memoryModal').classList.add('show');
+
+    currentMemIdx = MEMORY_KEYS.indexOf(key);
+
+    // Populate fields
+    document.getElementById('cinematicTag').innerHTML        = data.tag;
+    document.getElementById('cinematicStoryTitle').textContent = data.title;
+    document.getElementById('cinematicPoetic').textContent   = data.poetic;
+    document.getElementById('cinematicStoryText').textContent = data.text;
+    document.getElementById('cinematicCounter').textContent  =
+      `${currentMemIdx + 1} of ${MEMORY_KEYS.length} memories`;
+
+    // Main photo
+    const mainPhoto = document.getElementById('cinematicMainPhoto');
+    if (data.image) {
+      mainPhoto.style.backgroundImage = `url('${data.image}')`;
+    } else {
+      mainPhoto.style.backgroundImage = 'none';
+    }
+
+    // Photo strip thumbnails
+    const strip = document.getElementById('cinematicPhotoStrip');
+    strip.innerHTML = '';
+    (data.images || [data.image]).forEach((src, i) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'cinematic-thumb' + (i === 0 ? ' active' : '');
+      if (src) thumb.style.backgroundImage = `url('${src}')`;
+      thumb.addEventListener('click', () => {
+        mainPhoto.style.backgroundImage = `url('${src}')`;
+        strip.querySelectorAll('.cinematic-thumb').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+      });
+      strip.appendChild(thumb);
+    });
+
+    document.getElementById('cinematicModal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-  
-  function closeModal() {
-    document.getElementById('memoryModal').classList.remove('show');
+
+  function closeCinematicModal(e) {
+    // Only close when clicking the dark backdrop directly
+    if (e && e.target !== document.getElementById('cinematicModal')) return;
+    _doCloseCinematic();
+  }
+
+  function closeCinematicModalBtn() {
+    _doCloseCinematic();
+  }
+
+  function _doCloseCinematic() {
+    document.getElementById('cinematicModal').classList.remove('open');
     document.body.style.overflow = 'auto';
   }
-  
-  
+
+  // Keyboard close
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') _doCloseCinematic();
+  });
+
+  // Keep old closeModal() alive for any other references
+  function closeModal() { _doCloseCinematic(); }
+
+  // Scroll-reveal for museum cards
+  function initMuseumReveal() {
+    const cards = document.querySelectorAll('.museum-card');
+    if (!cards.length) return;
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    cards.forEach(card => io.observe(card));
+  }
+
+
+  /* ─────────────────────────────────────────
+     3b. LOVE GALLERY + MEMORY LIGHTBOX
+  ───────────────────────────────────────── */
+
+  // ── Gallery photo data ──
+  // 📸 Fill in your captions, stories, dates, locations.
+  //    Drop photos into a gallery/ folder: gallery/photo1.jpg … photo12.jpg
+  //    voiceNote: 'audio/memory1.mp3'  — path to voice note for that photo
+  const GALLERY_DATA = [
+    {
+      src:      'gallery/photo1.jpg',
+      caption:  'Us at the beginning 💜',
+      story:    "Every great love story has a beginning. Ours started with a feeling I couldn't explain — just a certainty that you were someone extraordinary.",
+      date:     '2022', location: '', voiceNote: null
+    },
+    {
+      src:      'gallery/photo2.jpg',
+      caption:  'That smile that gets me every time',
+      story:    "You smiled and I forgot everything I was thinking about. That's the effect you have on me, and I hope it never stops.",
+      date:     '', location: '', voiceNote: null
+    },
+    {
+      src:      'gallery/photo3.jpg',
+      caption:  'You, just being you',
+      story:    "Unposed. Unguarded. Just you — and you are the most beautiful thing I've ever seen.",
+      date:     '', location: 'Embu', voiceNote: null
+    },
+    {
+      src:      'gallery/photo4.jpg',
+      caption:  'My favourite person 🌸',
+      story:    "Out of everyone in the world, I am so grateful my favourite person is also my person.",
+      date:     '', location: '', voiceNote: null
+    },
+    {
+      src:      'gallery/photo5.jpg',
+      caption:  "A day I'll never forget",
+      story:    "Some days are made of pure gold. This was one of them. Because you were there.",
+      date:     '', location: '', voiceNote: null
+    },
+    {
+      src:      'gallery/photo6.jpg',
+      caption:  'The eyes that caught my soul',
+      story:    "I looked at you and I didn't look away. Those eyes hold something the rest of the world is still searching for.",
+      date:     '', location: '', voiceNote: null
+    },
+    {
+      src:      'gallery/photo7.jpg',
+      caption:  'Your light ✨',
+      story:    "You don't just walk into a room. You illuminate it. I have watched you do it over and over, and it never gets old.",
+      date:     '', location: '', voiceNote: null
+    },
+    {
+      src:      'gallery/photo8.jpg',
+      caption:  'Together is my favourite place 💕',
+      story:    "Anywhere becomes my favourite place when you're the reason I'm there.",
+      date:     '', location: '', voiceNote: null
+    },
+    {
+      src:      'gallery/photo9.jpg',
+      caption:  'The laugh I fell in love with',
+      story:    "This laugh. I could live inside this laugh. It is the most joyful, authentic, beautiful sound in the world to me.",
+      date:     '', location: '', voiceNote: null
+    },
+    {
+      src:      'gallery/photo10.jpg',
+      caption:  'Walking into forever with you',
+      story:    "I don't know what the future looks like. But I know I want every version of it to have you in it.",
+      date:     '', location: '', voiceNote: null
+    },
+    {
+      src:      'gallery/photo11.jpg',
+      caption:  'The real you — my favourite you',
+      story:    "People show you pieces of themselves over time. You showed me all of you — and every piece made me love you more.",
+      date:     '', location: '', voiceNote: null
+    },
+    {
+      src:      'gallery/photo12.jpg',
+      caption:  'My forever person 💜',
+      story:    "One year and five months of loving you. Two years and four months of knowing you. A lifetime of wanting more.",
+      date:     'February 2026', location: 'Our Story', voiceNote: null
+    }
+  ];
+
+  let lightboxIndex = 0;
+
+  // ── Gallery scroll reveal + tilt + floating hearts ──
+  function initGallery() {
+    const photos = document.querySelectorAll('.gallery-photo');
+    if (!photos.length) return;
+
+    // Apply tilt from data-tilt attribute
+    photos.forEach(photo => {
+      const tilt = photo.dataset.tilt || '0';
+      photo.style.setProperty('--tilt', tilt + 'deg');
+    });
+
+    // Scroll reveal with staggered delay
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.06 });
+    photos.forEach(p => io.observe(p));
+
+    // Floating hearts on hover (desktop)
+    photos.forEach(photo => {
+      photo.addEventListener('mouseenter', () => spawnGalleryHearts(photo));
+    });
+  }
+
+  function spawnGalleryHearts(photo) {
+    const container = photo.querySelector('.gallery-photo-hearts');
+    if (!container) return;
+    const emojis = ['💜','💕','✨','💖','🌸'];
+    for (let i = 0; i < 4; i++) {
+      setTimeout(() => {
+        const h = document.createElement('div');
+        h.className = 'gallery-heart-float';
+        h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        h.style.left = (15 + Math.random() * 65) + '%';
+        h.style.bottom = '10%';
+        container.appendChild(h);
+        setTimeout(() => h.remove(), 1700);
+      }, i * 160);
+    }
+  }
+
+  // ── Lightbox ──
+  function buildLightboxStars() {
+    const container = document.getElementById('lightboxStars');
+    if (!container || container.children.length > 0) return;
+    for (let i = 0; i < 80; i++) {
+      const s = document.createElement('div');
+      s.className = 'lb-star';
+      const size = (Math.random() * 2 + 1) + 'px';
+      s.style.width = size; s.style.height = size;
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top  = Math.random() * 100 + '%';
+      s.style.setProperty('--dur', (Math.random() * 4 + 2) + 's');
+      s.style.setProperty('--del', (Math.random() * 6) + 's');
+      s.style.setProperty('--op',  (Math.random() * 0.5 + 0.2).toFixed(2));
+      container.appendChild(s);
+    }
+  }
+
+  function openLightbox(index) {
+    lightboxIndex = index;
+    buildLightboxStars();
+    renderLightbox();
+    document.getElementById('lightboxPortal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function renderLightbox() {
+    const data  = GALLERY_DATA[lightboxIndex];
+    const total = GALLERY_DATA.length;
+    if (!data) return;
+
+    // Photo
+    const img = document.getElementById('lightboxPhotoImg');
+    img.style.backgroundImage = data.src ? `url('${data.src}')` : 'none';
+
+    // Text
+    document.getElementById('lightboxCaption').textContent = data.caption || '';
+    document.getElementById('lightboxStory').textContent   = data.story   || '';
+
+    // Date / location
+    const dateEl = document.getElementById('lightboxDate');
+    const locEl  = document.getElementById('lightboxLocation');
+    if (data.date) {
+      dateEl.innerHTML = `<i class="fas fa-calendar-heart" style="font-size:0.6rem"></i>&nbsp;${data.date}`;
+      dateEl.style.display = 'flex';
+    } else { dateEl.style.display = 'none'; }
+
+    if (data.location) {
+      locEl.innerHTML = `<i class="fas fa-location-dot" style="font-size:0.6rem"></i>&nbsp;${data.location}`;
+      locEl.style.display = 'flex';
+    } else { locEl.style.display = 'none'; }
+
+    // Voice note button
+    const voiceBtn = document.getElementById('lightboxVoiceBtn');
+    voiceBtn.style.display = data.voiceNote ? 'inline-flex' : 'none';
+
+    // Counter
+    document.getElementById('lightboxCounter').textContent =
+      `${lightboxIndex + 1} of ${total} memories`;
+
+    // Dots navigation
+    const dotsEl = document.getElementById('lightboxDots');
+    dotsEl.innerHTML = '';
+    const show = Math.min(total, 12);
+    for (let i = 0; i < show; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'lightbox-dot' + (i === lightboxIndex ? ' active' : '');
+      const idx = i;
+      dot.addEventListener('click', e => {
+        e.stopPropagation();
+        lightboxIndex = idx;
+        renderLightbox();
+      });
+      dotsEl.appendChild(dot);
+    }
+
+    // Arrow visibility
+    document.getElementById('lightboxPrev').style.opacity = lightboxIndex === 0         ? '0.3' : '1';
+    document.getElementById('lightboxNext').style.opacity = lightboxIndex === total - 1 ? '0.3' : '1';
+  }
+
+  function lightboxNavigate(dir) {
+    const newIdx = lightboxIndex + dir;
+    if (newIdx < 0 || newIdx >= GALLERY_DATA.length) return;
+    lightboxIndex = newIdx;
+    renderLightbox();
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightboxPortal').classList.remove('open');
+    document.body.style.overflow = 'auto';
+  }
+
+  function closeLightboxBackdrop(e) {
+    if (e.target === document.getElementById('lightboxPortal')) closeLightbox();
+  }
+
+  // Keyboard: arrow nav + escape
+  document.addEventListener('keydown', e => {
+    const portal = document.getElementById('lightboxPortal');
+    if (!portal || !portal.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); lightboxNavigate(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); lightboxNavigate(1);  }
+    if (e.key === 'Escape')     closeLightbox();
+  });
+
+
   /* ─────────────────────────────────────────
      4. APPRECIATION MESSAGES
   ───────────────────────────────────────── */
   const APPRECIATION_DATA = [
+  
+    {
+      icon:  'fas fa-pen-fancy',
+      title: 'Your Quiet Gentle spirit',
+      text:  "Your quiet, gentle spirit is a rare sanctuary that heals the world simply by being present within it. You dont need to shout to be profound; your stillness carries a strength that transforms everything it touches."
+    },
     {
       icon:  'fas fa-music',
       title: 'Your Voice & Gift of Song',
       text:  "Favour, when you sing, the world becomes more beautiful. Your voice carries a piece of your soul — warm, genuine, and deeply moving. The way you express yourself through music shows the tenderness of your heart. Every note you sing is a prayer that touches heaven. I'm eternally blessed to witness your gift. Your singing brings me peace in ways nothing else can. It's like listening to an angel."
-    },
-    {
-      icon:  'fas fa-pen-fancy',
-      title: 'Your Passion for Journalism',
-      text:  "Your mind is brilliant and awakens something profound in me. The way you observe stories, uncover hidden truths, and tell them with such compassion — it's extraordinary. Your journalism isn't just a career; it's your calling, your purpose. You see the world's pain and respond with empathy and precision. That's the mark of a true journalist and an exceptionally beautiful soul. You make the world better."
     },
     {
       icon:  'fas fa-cross',
@@ -160,13 +495,13 @@ function initializeParticles() {
     },
     {
       icon:  'fas fa-eye',
-      title: 'Your Eyes — Windows to Your Soul',
-      text:  "Those eyes… they tell every story your heart is feeling in that moment. They sparkle with joy when you're genuinely happy, they soften with tenderness when you show compassion, they burn with passionate intensity when you care deeply about something. Looking into your eyes, I see kindness, profound intelligence, depth of character, and an endless ocean of love. They're the most beautiful thing I've ever laid eyes upon."
+      title: 'Your Cheerful Presence',
+      text:  "Your laughter is a sudden light that turns ordinary moments into memories, warming every room with the effortless grace of your joy. You have a rare gift for making the world feel brighter and more alive just by being happy within it."
     },
     {
       icon:  'fas fa-face-smile-wink',
       title: 'Your Beauty — Every Detail',
-      text:  "Every single detail of you is perfection to me. Your nose, your cheekbones, the way your face comes completely alive when you smile or laugh — it's breathtakingly beautiful. But here's the truth: your physical beauty is just the wrapping around a soul that's infinitely more radiant. You're beautiful not just because of what you look like, but because of who you are. That's true beauty."
+      text:  "Every single detail of you is perfection to me. It was God taking his time.The way your face comes completely alive when you smile or laugh — it's breathtakingly beautiful. But here's the truth: your physical beauty is just the wrapping around a soul that's infinitely more radiant. You're beautiful not just because of what you look like, but because of who you are. That's true beauty."
     }
   ];
   
@@ -318,9 +653,10 @@ function initializeParticles() {
     'home': 0.35,
     'story': 0.25,
     'memories': 0.40,
+    'gallery': 0.45,
     'letter': 0.30,
     'appreciation': 0.35,
-    'voice': 0.15,
+    'voice': 0,
     'final': 0.50
   };
 
@@ -661,7 +997,7 @@ function initializeParticles() {
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
-    const particles = ['💜', '💕', '✨', '🌸', '💖', '⭐', '💫', '🌟', '🌹'];
+    const particles = ['💜', '💕', '🎁','✨', '🌸', '💖', '⭐', '🎁', '🌟', '🌹'];
     
     for (let i = 0; i < 16; i++) {
       const particle = document.createElement('div');
@@ -783,7 +1119,7 @@ function initializeParticles() {
   
   const PAUSE_MESSAGES = [
     {
-        text: 'Click the floating flowers to see which ones hide <span class="highlight">secret memories</span>. There are <span class="highlight">8 Memories to unlock</span>.',
+        text: 'Click the floating Gift boxes to see which ones hide <span class="highlight">secret memories</span>. There are <span class="highlight">8 Memories to unlock</span>.',
         afterSection: 'home'
     },
     {
@@ -937,17 +1273,6 @@ function initializeParticles() {
   }
   
   
-  /* ─────────────────────────────────────────
-     MODAL CLOSE
-  ───────────────────────────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
-    const memoryModal = document.getElementById('memoryModal');
-    if (memoryModal) {
-      memoryModal.addEventListener('click', e => { if (e.target === memoryModal) closeModal(); });
-    }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-  });
-  
   
   /* ─────────────────────────────────────────
      ✨ INITIALISE ALL ✨
@@ -957,14 +1282,16 @@ function initializeParticles() {
     populateAppreciationMessages();
     createFloatingHearts();
     initScrollReveal();
+    initMuseumReveal();          // 🖼️ Living Love Museum
+    initGallery();               // 📸 Love Gallery + Lightbox
     initVoicePlayer();
     initVoiceSpotlight();
     initMusicPlayer();
     initMusicTransitions();
     initTypewriter();
-    initLetterWriting();        // 💌 NEW
-    initInteractiveBloom();     // 🫀 Enhanced with heartbeat
-    initReplayButton();         // 💜 NEW
+    initLetterWriting();         // 💌
+    initInteractiveBloom();      // 🫀
+    initReplayButton();          // 💜
     initCinematicExperience();
     initEmotionalPauses();
   });

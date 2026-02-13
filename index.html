@@ -136,7 +136,7 @@
         REPLACE the src below with your actual audio file path.
         Example: <source src="audio/our-song.mp3" type="audio/mpeg">
       -->
-      <source src="song1.mp3" type="audio/wav">
+      <source src="media/song1.mp3" type="audio/wav">
     </audio>
 
     <!-- Navigation -->
@@ -144,6 +144,7 @@
       <a href="#home"><i class="fas fa-heart"></i> Home</a>
       <a href="#story"><i class="fas fa-book"></i> Our Story</a>
       <a href="#memories"><i class="fas fa-images"></i> Memories</a>
+      <a href="#gallery"><i class="fas fa-camera-retro"></i> Gallery</a>
       <a href="#appreciation"><i class="fas fa-sparkles"></i> What Makes You Special</a>
       <a href="#voice"><i class="fas fa-headphones"></i> Voice Message</a>
       <a href="#final"><i class="fas fa-infinity"></i> Forever</a>
@@ -169,104 +170,352 @@
           <div class="timeline">
 
             <div class="timeline-item scroll-reveal">
-              <h3><i class="fas fa-church"></i> Christian Union — First Year</h3>
-              <p>It was during that first-year Christian Union programme when I first saw you. There was something different about you, something that made my heart pause. You radiated a light that drew me in — authentic, warm, and deeply spiritual.</p>
+              <h3><i class="fas fa-church"></i>Anzafyt Christian Union — First Year</h3>
+              <p>It all started in Anzafyt. Couldn't tell why it felt so void without you around. That specific day when you were at the salon. Anzafyt felt so dull. I waited for you till I couldn't any longer</p>
             </div>
 
             <div class="timeline-item scroll-reveal">
-              <h3><i class="fas fa-comments"></i> In the WhatsApp Group</h3>
-              <p>We noticed each other in that WhatsApp group. Your messages were always thoughtful, always kind. That's when I realized you weren't just beautiful on the outside — your soul was even more radiant. I found myself checking my phone constantly, just to see if you had posted something.</p>
+              <h3><i class="fas fa-comments"></i> In the Anzafyt WhatsApp Group</h3>
+              <p>How we used to chat in that group. How you were furious to attack. To defend what you love...dont deny... How you all got me in trouble. I felt. It was all a story forming.</p>
             </div>
 
             <div class="timeline-item scroll-reveal">
               <h3><i class="fas fa-map-location-dot"></i> Walking Past Embu Town</h3>
-              <p>That walk past Embu town together changed everything. The way you laughed, the way you moved through the world with such grace and purpose. In those moments, I knew that meeting you wasn't just chance — it was destiny. You became my favorite person to be with.</p>
+              <p>That specific day when we went for a walk and got lost for the first time. I bet we are now used to getting lost. But that...</p>
             </div>
 
             <div class="timeline-item scroll-reveal">
-              <h3><i class="fas fa-water"></i> The Falls & The Mud</h3>
-              <p>And then there was the falls. That moment when you slipped and got muddy, laughing at yourself without embarrassment — that's when I fell completely in love. You're real, you're humble, you're perfect in your imperfections. That muddy moment was the moment I knew I wanted forever with you.</p>
+              <h3><i class="fas fa-water"></i> Ezra Conference New year</h3>
+              <p>Moving in the new year with you was really an amazing experience. The kesha, THe prayers and everything. The healing it brought around with it. Can't wait for such an experience again</p>
             </div>
 
             <div class="timeline-item scroll-reveal">
               <h3><i class="fas fa-ring"></i> 2 Years & 4 Months</h3>
-              <p>From that Christian Union programme to now — every day with you has been a confirmation. You entered my life like a gentle breeze carrying the scent of lavender. I knew then that you were someone extraordinary, and I know it even more now.</p>
+              <p>From the Anzafyt to now — every day with you has been a confirmation. You entered my life like a gentle breeze carrying the scent of lavender. I knew then that you were someone extraordinary, and I know it even more now.</p>
             </div>
 
             <div class="timeline-item scroll-reveal">
               <h3><i class="fas fa-heart"></i> 1 Year & 5 Months Together</h3>
-              <p>We officially became each other's forever. Every moment since has been a confirmation of what my heart knew from the very beginning. Being with you isn't just the best decision I've ever made — it's a constant reminder of God's goodness in my life.</p>
+              <p>We officially became each other's forever.18th September 2024. Every moment since has been a confirmation of what my heart knew from the very beginning. Being with you isn't just the best decision I've ever made — it's a constant reminder of God's goodness in my life.</p>
             </div>
-
-            <div class="timeline-item scroll-reveal">
-              <h3><i class="fas fa-stars"></i> Today & Forever</h3>
-              <p>And now, I get to celebrate you — the most beautiful, intelligent, kind-hearted soul I've ever known. Every day I choose you. Every moment matters. Thank you for being my greatest blessing, my forever person, my home.</p>
-            </div>
-
           </div>
         </div>
       </section>
 
-      <!-- ── MEMORIES ── -->
+      <!-- ── MEMORIES (LIVING LOVE MUSEUM) ── -->
       <section class="section" id="memories">
-        <div class="memories-wrapper">
-          <h2><i class="fas fa-images"></i> Playful Memories</h2>
-          <p class="memories-hint"><i class="fas fa-hand-pointer"></i> Click each memory to discover more</p>
-          <div class="memories-grid">
+        <div class="museum-wrapper">
 
-            <div class="memory-card" onclick="openMemoryModal(this)">
-              <div class="memory-icon"><i class="fas fa-microphone-alt"></i></div>
-              <h3>Your Voice</h3>
-              <p>That melodic voice when you sing…</p>
-              <span class="expand-hint">Click to expand</span>
+          <div class="museum-header">
+            <span class="museum-eyebrow">Our Story, In Frames</span>
+            <h2 class="museum-title">A Living Love Museum</h2>
+            <p class="museum-subtitle">Six chapters of the most beautiful story I've ever lived — ours.</p>
+          </div>
+
+          <div class="museum-grid">
+
+            <!-- Card 1 — Voice (tall, left) -->
+            <div class="museum-card museum-card--tall" data-memory="voice" onclick="openCinematicModal('voice')">
+              <div class="museum-card-photo" style="background-image: url('img/sing.jpg')">
+                <div class="museum-card-gradient"></div>
+              </div>
+              <div class="museum-card-overlay">
+                <span class="museum-card-tag"><i class="fas fa-music"></i> Singing</span>
+                <div class="museum-card-text">
+                  <h3 class="museum-card-title">Your Voice</h3>
+                  <p class="museum-card-caption">"When you sing..I mean Worship...heaven stops to listen"</p>
+                </div>
+                <span class="museum-card-cta">Open memory <i class="fas fa-arrow-right"></i></span>
+              </div>
             </div>
 
-            <div class="memory-card" onclick="openMemoryModal(this)">
-              <div class="memory-icon"><i class="fas fa-face-smile"></i></div>
-              <h3>Your Laughter</h3>
-              <p>The way your whole face lights up…</p>
-              <span class="expand-hint">Click to expand</span>
+            <!-- Card 2 — Laughter (wide) -->
+            <div class="museum-card museum-card--wide" data-memory="laughter" onclick="openCinematicModal('laughter')">
+              <div class="museum-card-photo" style="background-image: url('img/laughter.jpeg')">
+                <div class="museum-card-gradient"></div>
+              </div>
+              <div class="museum-card-overlay">
+                <span class="museum-card-tag"><i class="fas fa-face-smile"></i> Joy</span>
+                <div class="museum-card-text">
+                  <h3 class="museum-card-title">Your Laughter</h3>
+                  <p class="museum-card-caption">"The laugh I fell in love with first"</p>
+                </div>
+                <span class="museum-card-cta">Open memory <i class="fas fa-arrow-right"></i></span>
+              </div>
             </div>
 
-            <div class="memory-card" onclick="openMemoryModal(this)">
-              <div class="memory-icon"><i class="fas fa-brain"></i></div>
-              <h3>Your Mind</h3>
-              <p>Your journalism brilliance…</p>
-              <span class="expand-hint">Click to expand</span>
+            <!-- Card 3 — Mind (square) -->
+            <div class="museum-card" data-memory="mind" onclick="openCinematicModal('mind')">
+              <div class="museum-card-photo" style="background-image: url('img/cook.jpg')">
+                <div class="museum-card-gradient"></div>
+              </div>
+              <div class="museum-card-overlay">
+                <span class="museum-card-tag"><i class="fas fa-pen-nib"></i> My Cook</span>
+                <div class="museum-card-text">
+                  <h3 class="museum-card-title">Your Cooking skills</h3>
+                  <p class="museum-card-caption">"Remember this day when you made me fish for the very 1st time?"</p>
+                </div>
+                <span class="museum-card-cta">Open memory <i class="fas fa-arrow-right"></i></span>
+              </div>
             </div>
 
-            <div class="memory-card" onclick="openMemoryModal(this)">
-              <div class="memory-icon"><i class="fas fa-star"></i></div>
-              <h3>Your Beauty</h3>
-              <p>Beyond your physical beauty…</p>
-              <span class="expand-hint">Click to expand</span>
+            <!-- Card 4 — Beauty (square) -->
+            <div class="museum-card" data-memory="beauty" onclick="openCinematicModal('beauty')">
+              <div class="museum-card-photo" style="background-image: url('img/beauty.jpeg')">
+                <div class="museum-card-gradient"></div>
+              </div>
+              <div class="museum-card-overlay">
+                <span class="museum-card-tag"><i class="fas fa-eye"></i> Beauty</span>
+                <div class="museum-card-text">
+                  <h3 class="museum-card-title">Your Beauty</h3>
+                  <p class="museum-card-caption">"Jimmy's Most beautiful lady on this side of the planet"</p>
+                </div>
+                <span class="museum-card-cta">Open memory <i class="fas fa-arrow-right"></i></span>
+              </div>
             </div>
 
-            <div class="memory-card" onclick="openMemoryModal(this)">
-              <div class="memory-icon"><i class="fas fa-shield"></i></div>
-              <h3>Your Support</h3>
-              <p>How you believe in me…</p>
-              <span class="expand-hint">Click to expand</span>
+            <!-- Card 5 — Support (wide) -->
+            <div class="museum-card museum-card--wide" data-memory="support" onclick="openCinematicModal('support')">
+              <div class="museum-card-photo" style="background-image: url('img/stydying.jpeg')">
+                <div class="museum-card-gradient"></div>
+              </div>
+              <div class="museum-card-overlay">
+                <span class="museum-card-tag"><i class="fas fa-heart"></i> Growth</span>
+                <div class="museum-card-text">
+                  <h3 class="museum-card-title">Your Support</h3>
+                  <p class="museum-card-caption">"You believed in me before I believed in myself"</p>
+                </div>
+                <span class="museum-card-cta">Open memory <i class="fas fa-arrow-right"></i></span>
+              </div>
             </div>
 
-            <div class="memory-card" onclick="openMemoryModal(this)">
-              <div class="memory-icon"><i class="fas fa-cross"></i></div>
-              <h3>Your Faith</h3>
-              <p>The beautiful way your devotion to God…</p>
-              <span class="expand-hint">Click to expand</span>
+            <!-- Card 6 — Faith (tall, right) -->
+            <div class="museum-card museum-card--tall" data-memory="faith" onclick="openCinematicModal('faith')">
+              <div class="museum-card-photo" style="background-image: url('img/worshipper.jpeg')">
+                <div class="museum-card-gradient"></div>
+              </div>
+              <div class="museum-card-overlay">
+                <span class="museum-card-tag"><i class="fas fa-cross"></i> Faith</span>
+                <div class="museum-card-text">
+                  <h3 class="museum-card-title">Your Faith</h3>
+                  <p class="museum-card-caption">"Her devotion to God makes everything sacred"</p>
+                </div>
+                <span class="museum-card-cta">Open memory <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </div>
+
+          </div><!-- /.museum-grid -->
+
+        </div><!-- /.museum-wrapper -->
+      </section>
+
+      <!-- ── CINEMATIC MEMORY MODAL ── -->
+      <div id="cinematicModal" class="cinematic-modal" onclick="closeCinematicModal(event)">
+        <div class="cinematic-modal-inner">
+
+          <!-- Close -->
+          <button class="cinematic-close" onclick="closeCinematicModalBtn()">
+            <i class="fas fa-times"></i>
+          </button>
+
+          <!-- Left — image panel -->
+          <div class="cinematic-image-panel">
+            <div class="cinematic-main-photo" id="cinematicMainPhoto">
+              <!-- Background image injected by JS -->
+              <div class="cinematic-photo-grain"></div>
+            </div>
+            <!-- Photo strip (thumbnails) -->
+            <div class="cinematic-photo-strip" id="cinematicPhotoStrip">
+              <!-- Thumbnails injected by JS -->
+            </div>
+          </div>
+
+          <!-- Right — story panel -->
+          <div class="cinematic-story-panel">
+            <div class="cinematic-story-inner">
+              <span class="cinematic-tag" id="cinematicTag"></span>
+              <h2 class="cinematic-story-title" id="cinematicStoryTitle"></h2>
+              <div class="cinematic-divider"></div>
+              <p class="cinematic-poetic" id="cinematicPoetic"></p>
+              <p class="cinematic-story-text" id="cinematicStoryText"></p>
+              <div class="cinematic-footer">
+                <span class="cinematic-heart">💜</span>
+                <span class="cinematic-counter" id="cinematicCounter"></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── LOVE GALLERY ── -->
+      <section class="section gallery-section" id="gallery">
+        <div class="gallery-wrapper">
+
+          <div class="gallery-header">
+            <span class="gallery-eyebrow">Our Moments, Captured</span>
+            <h2 class="gallery-title">The Love Gallery</h2>
+            <p class="gallery-subtitle">Every photo is a heartbeat. Every frame, a reason I chose you.</p>
+          </div>
+
+          <div class="gallery-masonry" id="galleryMasonry">
+
+            <!-- Photo items — data-index used by lightbox JS -->
+            <!-- Sizes: gallery-photo--large, gallery-photo--tall, gallery-photo--wide, (default = square) -->
+            <!-- Add tilt via data-tilt="-2" / data-tilt="1.5" etc. -->
+
+            <div class="gallery-photo gallery-photo--large" data-index="0" onclick="openLightboxl(0)">
+              <div class="gallery-photo-img" style="background-image:url('img/beginning.jpg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">Us at the beginning 💜</p>
+              </div>
+            </div>
+
+            <div class="gallery-photo" data-tilt="-2.5" data-index="1" onclick="openLightboxl(1)">
+              <div class="gallery-photo-img" style="background-image:url('img/reconciled.jpeg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">That smile that gets me every time</p>
+              </div>
+            </div>
+
+            <div class="gallery-photo gallery-photo--tall" data-tilt="2" data-index="2" onclick="openLightboxl(2)">
+              <div class="gallery-photo-img" style="background-image:url('img/you.jpg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">You, just being you</p>
+              </div>
+            </div>
+
+            <div class="gallery-photo" data-tilt="1.5" data-index="3" onclick="openLightboxl(3)">
+              <div class="gallery-photo-img" style="background-image:url('img/fav.jpg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">My favourite person 🌸</p>
+              </div>
+            </div>
+
+            <div class="gallery-photo gallery-photo--wide" data-index="4" onclick="openLightboxl(4)">
+              <div class="gallery-photo-img" style="background-image:url('p1.jpg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">A day I'll never forget</p>
+              </div>
+            </div>
+
+            <div class="gallery-photo" data-tilt="-1.8" data-index="5" onclick="openLightboxl(5)">
+              <div class="gallery-photo-img" style="background-image:url('img/eyes.jpg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">The eyes that caught my soul</p>
+              </div>
+            </div>
+
+            <div class="gallery-photo gallery-photo--tall" data-tilt="2.2" data-index="6" onclick="openLightboxl(6)">
+              <div class="gallery-photo-img" style="background-image:url('img/journalist.jpg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">Your light ✨</p>
+              </div>
+            </div>
+
+            <div class="gallery-photo gallery-photo--large" data-tilt="-1.2" data-index="7" onclick="openLightboxl(7)">
+              <div class="gallery-photo-img" style="background-image:url('img/together.jpeg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">Together is my favourite place 💕</p>
+              </div>
+            </div>
+
+            <div class="gallery-photo" data-tilt="1" data-index="8" onclick="openLightboxl(8)">
+              <div class="gallery-photo-img" style="background-image:url('img/laughter.jpeg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">The laugh I fell in love with</p>
+              </div>
+            </div>
+
+            <div class="gallery-photo gallery-photo--wide" data-tilt="-2" data-index="9" onclick="openLightboxl(9)">
+              <div class="gallery-photo-img" style="background-image:url('img/walking.jpeg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">Walking into forever with you</p>
+              </div>
+            </div>
+
+            <div class="gallery-photo" data-tilt="3" data-index="10" onclick="openLightboxl(10)">
+              <div class="gallery-photo-img" style="background-image:url('img/real.jpg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">The real you — my favourite you</p>
+              </div>
+            </div>
+
+            <div class="gallery-photo" data-tilt="-1.5" data-index="11" onclick="openLightboxl(11)">
+              <div class="gallery-photo-img" style="background-image:url('img/njukiri.jpeg')"></div>
+              <div class="gallery-photo-hearts"></div>
+              <div class="gallery-photo-overlay">
+                <p class="gallery-photo-caption">Finally your support...NJUKIRI💜</p>
+              </div>
+            </div>
+
+          </div><!-- /.gallery-masonry -->
+
+        </div><!-- /.gallery-wrapper -->
+      </section>
+
+      <!-- ── MEMORY LIGHTBOX PORTAL ── -->
+      <div id="lightboxPortal" class="lightbox-portal" onclick="closeLightboxBackdrop(event)">
+
+        <!-- Ambient starfield -->
+        <div class="lightbox-stars" id="lightboxStars"></div>
+
+        <!-- Navigation arrows -->
+        <button class="lightbox-nav lightbox-nav--prev" id="lightboxPrev" onclick="lightboxNavigate(-1)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-nav lightbox-nav--next" id="lightboxNext" onclick="lightboxNavigate(1)">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Close -->
+        <button class="lightbox-close" id="lightboxClose" onclick="closeLightbox()">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Main portal card -->
+        <div class="lightbox-card" id="lightboxCard">
+
+          <!-- Photo -->
+          <div class="lightbox-photo-frame" id="lightboxPhotoFrame">
+            <div class="lightbox-photo-img" id="lightboxPhotoImg"></div>
+            <div class="lightbox-photo-vignette"></div>
+          </div>
+
+          <!-- Info panel -->
+          <div class="lightbox-info">
+
+            <div class="lightbox-info-top">
+              <span class="lightbox-date" id="lightboxDate"></span>
+              <span class="lightbox-location" id="lightboxLocation"></span>
+            </div>
+
+            <h3 class="lightbox-caption" id="lightboxCaption"></h3>
+            <p class="lightbox-story" id="lightboxStory"></p>
+
+            <!-- Optional voice note button -->
+            <button class="lightbox-voice-btn" id="lightboxVoiceBtn" style="display:none">
+              <i class="fas fa-play"></i>
+              <span>Hear my voice note for this memory</span>
+            </button>
+
+            <div class="lightbox-counter-row">
+              <span class="lightbox-counter" id="lightboxCounter"></span>
+              <div class="lightbox-dots" id="lightboxDots"></div>
             </div>
 
           </div>
-        </div>
-      </section>
-
-      <!-- Memory Modal -->
-      <div id="memoryModal" class="modal">
-        <div class="modal-content">
-          <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
-          <div id="modalMemoryIcon" class="memory-icon modal-memory-icon"></div>
-          <h2 id="modalMemoryTitle"></h2>
-          <p id="modalMemoryText"></p>
         </div>
       </div>
 
@@ -322,7 +571,7 @@
                   REPLACE with your actual voice recording.
                   Example: <source src="audio/voice-message.mp3" type="audio/mpeg">
                 -->
-                <source src="song2.mp3" type="audio/wav">
+                <source src="media/voicenote.flac" type="audio/wav">
               </audio>
             </div>
             <p class="voice-note">This is a special message recorded just for you. No one else will ever hear this moment.</p>
@@ -361,13 +610,13 @@
               <p class="finale-text">
                 My dearest love,<br><br>
                 <span class="finale-reveal-text">
-                  This website is a love letter — a digital embrace that holds every moment, every feeling, every reason I choose you every single day. From the moment I first saw you at Christian Union, something shifted in my soul. You weren't just beautiful; you were different. You were real.
+                  This website is a love letter — a digital embrace that holds every moment, every feeling, every reason I choose you every single day. From the moment we interacted in Anzafyt, SOmething shifted my soul. You were just different. Your presence lighted up everything. You were real.
                   <br><br>
-                  I remember the WhatsApp group messages — how I found myself checking my phone obsessively, just hoping you'd posted something. Then came that walk past Embu town, where I realized destiny wasn't a fairy tale; it was you. It was always you.
+                  I remember the Anzafyt WhatsApp group messages — how I found myself checking my phone obsessively, just hoping you'd sent something. Then came that walk past Embu town, where I realized destiny wasn't a fairy tale; it was you. It was always you.
                   <br><br>
                   And that moment at the falls when you fell in the mud and laughed without a care — that's when I knew. That's when I understood what forever meant. You're perfectly imperfect, authentically beautiful, and undeniably mine.
                   <br><br>
-                  Your voice makes heaven listen. Your journalism makes the world better. Your faith inspires me to be stronger. Your eyes hold oceans of love. And that beautiful nose, those cheekbones — they frame a face that I could stare at for eternity and never tire.
+                  Your voice makes heaven listen. Your journalism talents makes the world better. Your faith inspires me to be stronger. Your eyes hold oceans of love. And that beautiful nose, those cheekbones — they frame a face that I could stare at for eternity and never tire.
                   <br><br>
                   But more than anything, Favour, it's your heart. It's how you love unconditionally, support passionately, and believe in God so deeply that it changes everyone around you. You've made me believe in myself when I doubted. You've made me believe in us.
                   <br><br>

@@ -640,7 +640,7 @@
 }
 
 .secret-spark::before {
-  content: '✨';
+  content: '🎁';
   font-size: 18px;
   display: block;
   animation: sparkTwirl 3s ease-in-out infinite;
